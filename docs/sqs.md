@@ -1,15 +1,14 @@
-# Amazon Simple Queue Service (SQS)
+# Amazon Simple Queue Service \(SQS\)
 
 ## What is SQS?
 
-Amazon Simple Queue Service helps you decouple message producers and message consumers. 
+Amazon Simple Queue Service helps you decouple message producers and message consumers.
 
 Suppose you have an online voting application that will have millions of people voting at once. It would be hard to handle millions of messages per second, but with SQS you can have a queue that stores all the votes and then you process them as they come.
 
 A queue is just a fancy word for a line, you take all the votes and you make them sit in a line until you are ready to process them, just like lines work at the grocery store.
 
-[What are possible use cases for Amazon SQS - StackOverflow
-](https://stackoverflow.com/questions/31752503/what-are-the-possible-use-cases-for-amazon-sqs-or-any-queue-service)
+[What are possible use cases for Amazon SQS - StackOverflow ](https://stackoverflow.com/questions/31752503/what-are-the-possible-use-cases-for-amazon-sqs-or-any-queue-service)
 
 ## Standard vs. FIFO
 
@@ -36,11 +35,9 @@ There are standard and there are FIFO queues.
 
 ## Access Policy
 
-<!-- TODO: Expand this -->
-
 You can manage access with IAM, but just like S3 buckets have their own access policies, SQS queues have their own access policies written in JSON. Here is the default policy saying that only the owner of the queue can send and receive messages from the queue.
 
-```
+```text
 {
   "Version": "2008-10-17",
   "Id": "__default_policy_ID",
@@ -69,3 +66,4 @@ SQS messages are encrypted in-flight by default, but not at rest. You can encryp
 We usually want to delete a message after using it, when a message has been received too many times we think something is wrong. We can configure how many times a message is received before we send it to the dead-letter queue.
 
 The dead letter queue is just another SQS queue. You can look at the messages in the DLQ to see what is failing to process. It is recommended to set the DLQ retention period to be longer than your other queues, because it's expiration is based on when it entered the first queue, not when it entered the DLQ.
+
